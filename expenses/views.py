@@ -10,18 +10,24 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.authtoken.models import Token
 from .auth_serializers import RegisterSerializer
 
+from collections import defaultdict
+from decimal import Decimal
+from django.conf import settings
+from .services.currency import convert_amount
+from expenses.config import currency_config
+
 
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def category_list(request):
     if request.method == "GET":
-        categories = Category.objects.all()
+        categories = Category.objects.filter(owner=request.user)
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
 
     serializer = CategorySerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    serializer.save()
+    serializer.save(owner=request.user)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -29,7 +35,7 @@ def category_list(request):
 @permission_classes([IsAuthenticated])
 def expense_list(request):
     if request.method == "GET":
-        expenses = Expense.objects.all()
+        expenses = Expense.objects.filter(owner=request.user)
 
         start_date = request.query_params.get("start_date")
         end_date = request.query_params.get("end_date")
@@ -91,17 +97,57 @@ def expense_detail(request, pk):
 
 
 
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def expense_summary(request):
-    summary = (
-        Expense.objects.filter(owner=request.user)
-        .values("category__name")
-        .annotate(total=Sum("amount"))
-        .order_by("category__name")
+
+    expenses = Expense.objects.filter(
+        owner=request.user
+    ).select_related("category")
+
+    categories = defaultdict(
+        lambda: {
+            "total": Decimal("0.00"),
+            "rate": None,
+            "as_of": None,
+        }
     )
 
-    return Response(list(summary))
+    for expense in expenses:
+
+        conversion = convert_amount(
+            expense.amount,
+            expense.currency,
+            currency_config.BASE_CURRENCY,
+        )
+
+        category_name = expense.category.name
+
+        categories[category_name]["total"] += conversion["amount"]
+
+        categories[category_name]["rate"] = str(
+            conversion["rate"]
+        )
+
+        categories[category_name]["as_of"] = (
+            conversion["date"]
+        )
+
+    response = []
+
+    for name, data in categories.items():
+        response.append({
+            "category": name,
+            "total": str(data["total"]),
+            "rate": data["rate"],
+            "as_of": data["as_of"],
+        })
+
+    return Response({
+        "base_currency": currency_config.BASE_CURRENCY,
+        "categories": response,
+    })
 
 
 
