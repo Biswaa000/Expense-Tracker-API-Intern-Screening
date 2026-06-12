@@ -15,7 +15,7 @@ from decimal import Decimal
 from django.conf import settings
 from .services.currency import convert_amount
 from expenses.config import currency_config
-
+from .services.bot import check_budget_limit
 
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
@@ -56,7 +56,8 @@ def expense_list(request):
             {"detail": "Invalid category"},
             status=status.HTTP_400_BAD_REQUEST,
         )
-    serializer.save(owner=request.user) 
+    expense = serializer.save(owner=request.user) 
+    check_budget_limit(expense)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -88,8 +89,8 @@ def expense_detail(request, pk):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        serializer.save(owner=request.user)
-
+        expense = serializer.save(owner=request.user)
+        check_budget_limit(expense)
         return Response(serializer.data)
 
     expense.delete()
