@@ -1,15 +1,12 @@
 {
   "info": {
+    "_postman_id": "7063e94a-5230-4191-bb99-116ddbbeb856",
     "name": "Expense Tracker API",
     "description": "Collection covering all endpoints of the Expense Tracker API.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45955646",
+    "_collection_link": "https://go.postman.co/collection/45955646-7063e94a-5230-4191-bb99-116ddbbeb856?source=collection_link"
   },
-  "variable": [
-    {
-      "key": "base_url",
-      "value": "http://127.0.0.1:8000"
-    }
-  ],
   "item": [
     {
       "name": "List Categories",
@@ -18,18 +15,109 @@
         "header": [],
         "url": {
           "raw": "{{base_url}}/api/categories/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "categories", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "categories",
+            ""
+          ]
         },
         "description": "Returns all categories."
-      }
+      },
+      "response": [
+        {
+          "name": "List Categories",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:25:25 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "192"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Groceries\",\n        \"description\": \"Food and household supplies\",\n        \"monthly_limit\": null\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Transport\",\n        \"description\": \"Uber, fuel, public transport\",\n        \"monthly_limit\": \"200.00\"\n    }\n]"
+        }
+      ]
     },
     {
       "name": "Create Category",
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
         ],
         "body": {
           "mode": "raw",
@@ -37,11 +125,177 @@
         },
         "url": {
           "raw": "{{base_url}}/api/categories/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "categories", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "categories",
+            ""
+          ]
         },
         "description": "Creates a new category."
-      }
+      },
+      "response": [
+        {
+          "name": "Create Category",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Groceries\",\n  \"description\": \"Food and household supplies\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:23:19 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "92"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 1,\n    \"name\": \"Groceries\",\n    \"description\": \"Food and household supplies\",\n    \"monthly_limit\": null\n}"
+        },
+        {
+          "name": "Create Category",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Transport\",\n    \"description\": \"Uber, fuel, public transport\",\n    \"monthly_limit\": 200.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:23:54 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "97"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 2,\n    \"name\": \"Transport\",\n    \"description\": \"Uber, fuel, public transport\",\n    \"monthly_limit\": \"200.00\"\n}"
+        }
+      ]
     },
     {
       "name": "List Expenses",
@@ -50,22 +304,120 @@
         "header": [],
         "url": {
           "raw": "{{base_url}}/api/expenses/?start_date=2026-01-01&end_date=2026-12-31",
-          "host": ["{{base_url}}"],
-          "path": ["api", "expenses", ""],
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "expenses",
+            ""
+          ],
           "query": [
-            { "key": "start_date", "value": "2026-01-01" },
-            { "key": "end_date", "value": "2026-12-31" }
+            {
+              "key": "start_date",
+              "value": "2026-01-01"
+            },
+            {
+              "key": "end_date",
+              "value": "2026-12-31"
+            }
           ]
         },
         "description": "Lists all expenses. Optionally filter by start_date and end_date (YYYY-MM-DD)."
-      }
+      },
+      "response": [
+        {
+          "name": "List Expenses",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/expenses/?start_date=2026-01-01&end_date=2026-12-31",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2026-12-31"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:34:46 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "249"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Weekly shop\",\n        \"amount\": \"54.20\",\n        \"currency\": \"USD\",\n        \"category\": 1,\n        \"date\": \"2026-06-09\",\n        \"notes\": \"Supermarket run\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Groceries\",\n        \"amount\": \"150.00\",\n        \"currency\": \"USD\",\n        \"category\": 1,\n        \"date\": \"2026-06-20\",\n        \"notes\": \"Weekly groceries\"\n    }\n]"
+        }
+      ]
     },
     {
       "name": "Create Expense",
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
         ],
         "body": {
           "mode": "raw",
@@ -73,11 +425,177 @@
         },
         "url": {
           "raw": "{{base_url}}/api/expenses/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "expenses", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "expenses",
+            ""
+          ]
         },
         "description": "Creates a new expense."
-      }
+      },
+      "response": [
+        {
+          "name": "Create Expense",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Weekly shop\",\n  \"amount\": \"54.20\",\n  \"category\": 1,\n  \"date\": \"2026-06-09\",\n  \"notes\": \"Supermarket run\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/expenses/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:27:45 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "123"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 1,\n    \"title\": \"Weekly shop\",\n    \"amount\": \"54.20\",\n    \"currency\": \"USD\",\n    \"category\": 1,\n    \"date\": \"2026-06-09\",\n    \"notes\": \"Supermarket run\"\n}"
+        },
+        {
+          "name": "Create Expense",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Public bus ride\",\n    \"amount\": 199.00,\n    \"currency\": \"NPR\",\n    \"category\": 2,\n    \"date\": \"2024-01-18\",\n    \"notes\": \" Holiday\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/expenses/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:31:04 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "120"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 4,\n    \"title\": \"Public bus ride\",\n    \"amount\": \"199.00\",\n    \"currency\": \"NPR\",\n    \"category\": 2,\n    \"date\": \"2024-01-18\",\n    \"notes\": \"Holiday\"\n}"
+        }
+      ]
     },
     {
       "name": "Retrieve Expense",
@@ -86,18 +604,173 @@
         "header": [],
         "url": {
           "raw": "{{base_url}}/api/expenses/1/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "expenses", "1", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "expenses",
+            "1",
+            ""
+          ]
         },
         "description": "Retrieves a single expense by id."
-      }
+      },
+      "response": [
+        {
+          "name": "Retrieve Expense",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/expenses/2/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                "2",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:36:56 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, DELETE, PUT, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "117"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 2,\n    \"title\": \"Uber ride\",\n    \"amount\": \"160.00\",\n    \"currency\": \"USD\",\n    \"category\": 2,\n    \"date\": \"2024-01-18\",\n    \"notes\": \"To airport\"\n}"
+        },
+        {
+          "name": "Retrieve all expense",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/expenses/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:37:31 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "607"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Weekly shop\",\n        \"amount\": \"54.20\",\n        \"currency\": \"USD\",\n        \"category\": 1,\n        \"date\": \"2026-06-09\",\n        \"notes\": \"Supermarket run\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Uber ride\",\n        \"amount\": \"160.00\",\n        \"currency\": \"USD\",\n        \"category\": 2,\n        \"date\": \"2024-01-18\",\n        \"notes\": \"To airport\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Yango ride\",\n        \"amount\": \"199.00\",\n        \"currency\": \"USD\",\n        \"category\": 2,\n        \"date\": \"2024-01-18\",\n        \"notes\": \"To  Friend\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Public bus ride\",\n        \"amount\": \"199.00\",\n        \"currency\": \"NPR\",\n        \"category\": 2,\n        \"date\": \"2024-01-18\",\n        \"notes\": \"Holiday\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Groceries\",\n        \"amount\": \"150.00\",\n        \"currency\": \"USD\",\n        \"category\": 1,\n        \"date\": \"2026-06-20\",\n        \"notes\": \"Weekly groceries\"\n    }\n]"
+        }
+      ]
     },
     {
       "name": "Update Expense",
       "request": {
         "method": "PUT",
         "header": [
-          { "key": "Content-Type", "value": "application/json" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
         ],
         "body": {
           "mode": "raw",
@@ -105,11 +778,100 @@
         },
         "url": {
           "raw": "{{base_url}}/api/expenses/1/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "expenses", "1", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "expenses",
+            "1",
+            ""
+          ]
         },
         "description": "Updates an existing expense by id."
-      }
+      },
+      "response": [
+        {
+          "name": "Update Expense",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Weekly shop (updated)\",\n  \"amount\": \"60.00\",\n  \"category\": 1,\n  \"date\": \"2026-06-09\",\n  \"notes\": \"Adjusted total\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/expenses/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                "1",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:39:58 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, DELETE, PUT, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "132"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 1,\n    \"title\": \"Weekly shop (updated)\",\n    \"amount\": \"60.00\",\n    \"currency\": \"USD\",\n    \"category\": 1,\n    \"date\": \"2026-06-09\",\n    \"notes\": \"Adjusted total\"\n}"
+        }
+      ]
     },
     {
       "name": "Delete Expense",
@@ -118,11 +880,88 @@
         "header": [],
         "url": {
           "raw": "{{base_url}}/api/expenses/1/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "expenses", "1", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "expenses",
+            "1",
+            ""
+          ]
         },
         "description": "Deletes an expense by id."
-      }
+      },
+      "response": [
+        {
+          "name": "Delete Expense",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/expenses/5/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                "5",
+                ""
+              ]
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:41:03 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, DELETE, PUT, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "0"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": null
+        }
+      ]
     },
     {
       "name": "Expense Summary",
@@ -131,18 +970,102 @@
         "header": [],
         "url": {
           "raw": "{{base_url}}/api/expenses/summary/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "expenses", "summary", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "expenses",
+            "summary",
+            ""
+          ]
         },
         "description": "Returns the total amount spent per category, converted to BASE_CURRENCY (Currency conversion feature)."
-      }
+      },
+      "response": [
+        {
+          "name": "Expense Summary",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/expenses/summary/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                "summary",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 17:13:12 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "196"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"base_currency\": \"USD\",\n    \"categories\": [\n        {\n            \"category\": \"Groceries\",\n            \"total\": \"198.88\",\n            \"rate\": \"1.1573\",\n            \"as_of\": \"2026-06-12\"\n        },\n        {\n            \"category\": \"Transport\",\n            \"total\": \"360.31\",\n            \"rate\": \"0.0066\",\n            \"as_of\": \"2026-06-12\"\n        }\n    ]\n}"
+        }
+      ]
     },
     {
       "name": "Create Category (with monthly budget)",
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
         ],
         "body": {
           "mode": "raw",
@@ -150,18 +1073,108 @@
         },
         "url": {
           "raw": "{{base_url}}/api/categories/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "categories", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "categories",
+            ""
+          ]
         },
         "description": "Bot alerts feature: creates a category with a monthly spending limit. Crossing it triggers a bot alert."
-      }
+      },
+      "response": [
+        {
+          "name": "Create Category (with monthly budget)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dining\",\n  \"description\": \"Restaurants and takeout\",\n  \"monthly_limit\": \"200.00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:43:06 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "89"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 3,\n    \"name\": \"Dining\",\n    \"description\": \"Restaurants and takeout\",\n    \"monthly_limit\": \"200.00\"\n}"
+        }
+      ]
     },
     {
       "name": "Create Expense (with currency)",
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
         ],
         "body": {
           "mode": "raw",
@@ -169,11 +1182,518 @@
         },
         "url": {
           "raw": "{{base_url}}/api/expenses/",
-          "host": ["{{base_url}}"],
-          "path": ["api", "expenses", ""]
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "expenses",
+            ""
+          ]
         },
         "description": "Currency conversion feature: creates an expense in a non-base currency. The summary endpoint converts it to BASE_CURRENCY."
+      },
+      "response": [
+        {
+          "name": "Create Expense (with currency)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Hotel in Paris\",\n  \"amount\": \"120.00\",\n  \"currency\": \"EUR\",\n  \"category\": 1,\n  \"date\": \"2026-06-09\",\n  \"notes\": \"Two nights\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/expenses/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:43:46 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "122"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 6,\n    \"title\": \"Hotel in Paris\",\n    \"amount\": \"120.00\",\n    \"currency\": \"EUR\",\n    \"category\": 1,\n    \"date\": \"2026-06-09\",\n    \"notes\": \"Two nights\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"testuser\",\r\n    \"password\": \"testpass123\",\r\n    \"email\": \"testuser@example.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/register/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "register",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Register",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"testuser\",\r\n    \"password\": \"testpass123\",\r\n    \"email\": \"testuser@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/register/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "register",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:15:23 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "52"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"token\": \"278956a86f1c6667df0e6f262b1d0e17624e4db8\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Login",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "",
+                "value": "",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"testuser\",\r\n    \"password\": \"testpass123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "login",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 12 Jun 2026 16:17:42 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "OPTIONS, POST"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "52"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"token\": \"278956a86f1c6667df0e6f262b1d0e17624e4db8\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Search Expense",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/expenses/?search=paris",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "expenses",
+            ""
+          ],
+          "query": [
+            {
+              "key": "search",
+              "value": "paris"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Search Expense",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/expenses/?search=paris",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "paris"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 13 Jun 2026 03:00:13 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "POST, OPTIONS, GET"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "124"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 6,\n        \"title\": \"Hotel in Paris\",\n        \"amount\": \"120.00\",\n        \"currency\": \"EUR\",\n        \"category\": 1,\n        \"date\": \"2026-06-09\",\n        \"notes\": \"Two nights\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Monthly Summary",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Monthly Summary",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token 278956a86f1c6667df0e6f262b1d0e17624e4db8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/expenses/monthly-summary/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "expenses",
+                "monthly-summary",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 13 Jun 2026 03:21:18 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "102"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"month\": \"2024-01\",\n        \"total\": \"558\"\n    },\n    {\n        \"month\": \"2026-05\",\n        \"total\": \"50\"\n    },\n    {\n        \"month\": \"2026-06\",\n        \"total\": \"180\"\n    }\n]"
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
       }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
     }
   ]
 }

@@ -1,235 +1,674 @@
 # Expense Tracker API — Intern Screening
 
-A small Django REST Framework backend for tracking personal spending
-(categories, expenses, date filtering, and a per-category summary).
+A Django REST Framework backend for tracking personal expenses, categories, summaries, authentication, currency conversion, budget alerts, and reporting.
 
-## Your Task (read this first)
+## Repository
 
-You will work with this codebase in four stages:
+GitHub Repository:
 
-1. **Fix 5 bugs.** The code contains **5 intentional bugs**. Find and fix them
-   all. Every hint you need is in the codebase or in this file.
-2. **Add Authentication (required).** Scope expenses and categories to the
-   logged-in user and protect the endpoints.
-3. **Build 2 integration features (required):**
-   [Currency conversion](#feature-1--currency-conversion) and
-   [Budget threshold bot alerts](#feature-2--budget-threshold-bot-alerts).
-   Both are specified in detail below, with example requests/responses — these
-   are the hard part.
-4. **Add 2 optional features** of your choice ([list below](#optional-pick-any-2)).
-
-Config placeholders for stage 3 are already in `.env.example` — copy them into
-your `.env`.
-
-Full rules, branch naming, and submission details are in
-[requirements](#full-requirements) at the bottom. Read that **before** writing
-code — workflow is graded.
-
-## What you've been given
-
-| File / Dir                 | What it is                                              |
-|----------------------------|---------------------------------------------------------|
-| `expenses/`                | The app: `models.py`, `serializers.py`, `views.py`, `urls.py`, `tests.py` |
-| `config/`                  | Django project settings and root URL config             |
-| `postman_collection.json`  | **Ready-to-import Postman collection — every endpoint.** Use it to test and hunt bugs. |
-| `.env.example`             | Template for your `.env`                                 |
-| `pyproject.toml`           | Dependencies (managed by `uv`)                          |
-| `manage.py`                | Django entry point                                      |
-
-## Setup (3 commands)
-
-Uses [uv](https://docs.astral.sh/uv/). Prefix every `manage.py` call with `uv run`.
-
-```bash
-uv sync                                  # create .venv + install deps
-cp .env.example .env                     # then fill in SECRET_KEY
-uv run python manage.py migrate          # set up the SQLite DB
-uv run python manage.py runserver        # start at http://127.0.0.1:8000/
-```
-
-## Test the endpoints
-
-1. Import `postman_collection.json` into Postman.
-2. The `base_url` variable is preset to `http://127.0.0.1:8000`.
-3. Run each request against your local server. **This is your main bug-hunting
-   tool** — compare actual responses against the expected behavior below.
-
-### Endpoints
-
-| Method | Endpoint                 | Description                                                        |
-|--------|--------------------------|-------------------------------------------------------------------|
-| GET    | `/api/categories/`       | List all categories                                               |
-| POST   | `/api/categories/`       | Create a category                                                 |
-| GET    | `/api/expenses/`         | List expenses (filter with `?start_date=` & `?end_date=`, inclusive) |
-| POST   | `/api/expenses/`         | Create an expense                                                 |
-| GET    | `/api/expenses/{id}/`    | Retrieve one expense                                              |
-| PUT    | `/api/expenses/{id}/`    | Update an expense                                                 |
-| DELETE | `/api/expenses/{id}/`    | Delete an expense                                                 |
-| GET    | `/api/expenses/summary/` | Total spent per category                                          |
-
-## Tech stack
-
-Python 3 · Django 5 · Django REST Framework · SQLite · python-dotenv
+https://github.com/Biswaa000/Expense-Tracker-API-Intern-Screening
 
 ---
 
-## Full Requirements
+# Setup
 
-### Git workflow (graded)
+## Clone Repository
 
-- Create a new repo under **your** GitHub account.
-- Default branch **must be named `trunk`** (not `main`/`master`).
-- One branch + one PR per item:
-  - Bug fixes → `fix/<bug-name>`
-  - Features → `feature/<feature-name>`
-- **Never commit fixes or features directly to `trunk`.** Merge via PR.
-- Do **not** squash. Keep a clean, atomic, readable history. Push regularly.
-- Each commit message must say **what** changed and **why**. Example:
+```bash
+git clone https://github.com/Biswaa000/Expense-Tracker-API-Intern-Screening.git
+cd Expense-Tracker-API-Intern-Screening
+```
 
-  ```text
-  fix(expenses): prevent negative expense amounts
-  fix(api): correct serializer field mapping
-  ```
+## Install Dependencies
 
-### Required features
+```bash
+uv sync
+```
 
-**Authentication** — expenses and categories owned by and scoped to the
-authenticated user; endpoints protected (token/session auth + login).
+## Environment Variables
 
-Plus the two integration features below.
+Create a `.env` file:
 
-#### Feature 1 — Currency conversion
+```env
+SECRET_KEY=your-secret-key
 
-Let expenses be recorded in different currencies and reported in one base
-currency, using a third-party exchange-rate API.
+BASE_CURRENCY=USD
 
-- Add a `currency` field to expenses (ISO code, e.g. `EUR`); `amount` stays in
-  that currency.
-- Reporting endpoints (e.g. `summary`) convert each amount to `BASE_CURRENCY`
-  (see `.env.example`) using rates from an exchange-rate API.
-- Free providers needing no key: `exchangerate.host`, `open.er-api.com`.
+EXCHANGE_RATE_API_KEY=your-api-key
 
-Example (illustrative — refine the exact shape as you see fit):
+DISCORD_WEBHOOK_URL=your-discord-webhook-url
+```
 
-```jsonc
-// POST /api/expenses/
+## Run Migrations
+
+```bash
+uv run python manage.py migrate
+```
+
+## Start Server
+
+```bash
+uv run python manage.py runserver
+```
+
+Server:
+
+```text
+http://127.0.0.1:8000/
+```
+
+---
+
+# Authentication
+
+Authentication is implemented using Django REST Framework Token Authentication.
+
+Protected endpoints require:
+
+```http
+Authorization: Token <token>
+```
+
+---
+
+# API Endpoints
+
+## Authentication
+
+### Register
+
+```http
+POST /api/register/
+```
+
+### Login
+
+```http
+POST /api/login/
+```
+
+## Categories
+
+### Create Category
+
+```http
+POST /api/categories/
+```
+
+### List Categories
+
+```http
+GET /api/categories/
+```
+
+## Expenses
+
+### Create Expense
+
+```http
+POST /api/expenses/
+```
+
+Example:
+
+```json
 {
-  "title": "Hotel in Paris",
-  "amount": "120.00",
-  "currency": "EUR",
+  "title": "Weekly shop",
+  "amount": "54.20",
+  "currency": "USD",
   "category": 1,
-  "date": "2026-06-09"
-}
-
-// 201 Created
-{
-  "id": 7,
-  "title": "Hotel in Paris",
-  "amount": "120.00",
-  "currency": "EUR",
-  "category": 1,
-  "date": "2026-06-09"
+  "date": "2026-06-09",
+  "notes": "Supermarket run"
 }
 ```
 
-```jsonc
-// GET /api/expenses/summary/   (BASE_CURRENCY = USD)
+### List Expenses
+
+```http
+GET /api/expenses/
+```
+
+### Expense Detail
+
+```http
+GET /api/expenses/<id>/
+PUT /api/expenses/<id>/
+DELETE /api/expenses/<id>/
+```
+
+## Reporting
+
+### Category Summary
+
+```http
+GET /api/expenses/summary/
+```
+
+### Monthly Summary
+
+```http
+GET /api/expenses/monthly-summary/
+```
+
+### Expense Search
+
+```http
+GET /api/expenses/?search=<keyword>
+```
+
+---
+
+# My Features
+
+## 1. Authentication
+
+### Overview
+
+Implemented token-based authentication using Django REST Framework Token Authentication. Each user can only access their own categories and expenses.
+
+### Design Decisions
+
+- Used DRF Token Authentication for simplicity.
+- Added ownership fields to models.
+- Scoped all queries to the authenticated user.
+- Protected all expense and category endpoints.
+
+### API Changes
+
+Added:
+
+```http
+POST /api/register/
+POST /api/login/
+```
+
+Protected:
+
+```http
+/ api/categories/
+/ api/expenses/
+/ api/expenses/summary/
+/ api/expenses/monthly-summary/
+```
+
+### Example Request
+
+```http
+POST /api/register/
+```
+
+```json
+{
+  "username": "testuser",
+  "password": "testpass123",
+  "email": "testuser@example.com"
+}
+```
+
+### Example Response
+
+```json
+{
+  "token": "<token>"
+}
+```
+
+### Assumptions
+
+- Token authentication is sufficient for this project.
+- Each user manages only their own expenses and categories.
+
+### Known Limitations
+
+- No token expiration.
+- No password reset functionality.
+
+### Commit
+
+```text
+15f306d
+```
+
+---
+
+## 2. Currency Conversion
+
+### Overview
+
+Expenses can be recorded in different currencies and reported in a single base currency.
+
+### Design Decisions
+
+- Added a `currency` field to expenses.
+- Extracted conversion logic into a dedicated service layer.
+- Reused conversion service across summary endpoints.
+- Base currency configured through environment settings.
+
+### API Changes
+
+Expense payload now includes:
+
+```json
+{
+  "currency": "USD"
+}
+```
+
+### Example Request
+
+```http
+POST /api/expenses/
+```
+
+```json
+{
+  "title": "Hotel in Paris",
+  "amount": "120.00",
+  "currency": "EUR",
+  "category": 1,
+  "date": "2026-06-09",
+  "notes": "Two nights"
+}
+```
+
+### Example Response
+
+```json
+{
+  "id": 6,
+  "title": "Hotel in Paris",
+  "amount": "120.00",
+  "currency": "EUR",
+  "category": 1,
+  "date": "2026-06-09",
+  "notes": "Two nights"
+}
+```
+
+### Currency Summary Example
+
+```http
+GET /api/expenses/summary/
+```
+
+```json
 {
   "base_currency": "USD",
   "categories": [
     {
-      "category": "Travel",
-      "total": "129.60",        // 120.00 EUR converted at 1.08
-      "rate": "1.08",
-      "as_of": "2026-06-10"
+      "category": "Groceries",
+      "total": "198.88",
+      "rate": "1.1573",
+      "as_of": "2026-06-12"
+    },
+    {
+      "category": "Transport",
+      "total": "360.31",
+      "rate": "0.0066",
+      "as_of": "2026-06-12"
     }
   ]
 }
 ```
 
-#### Feature 2 — Budget threshold bot alerts
+### Assumptions
 
-Send a chat-bot alert when a category's spending crosses a configured limit.
+- Exchange rates are retrieved from a third-party API.
+- Latest exchange rates are acceptable.
 
-- Add a per-category monthly budget limit.
-- When a created/updated expense pushes that category's month-to-date total over
-  its limit, send an alert via a bot (Telegram recommended — free token from
-  `@BotFather`; Discord/Slack also fine). Credentials come from `.env`
-  (`BOT_TOKEN`, `BOT_CHAT_ID`).
+### Known Limitations
 
-Example (illustrative — refine the exact shape as you see fit):
+- External API availability affects conversion.
+- Historical exchange rates are not used.
 
-```jsonc
-// Set a monthly limit on a category
-// POST /api/categories/   (or PATCH an existing one)
+### Commits
+
+```text
+9b172c7
+5a3a862
+```
+
+---
+
+## 3. Budget Alert Bot (Discord)
+
+### Overview
+
+Implemented automated Discord notifications when spending exceeds a category's monthly budget limit.
+
+> **Note:** Discord was used instead of Telegram because I do not currently have a Telegram account. The assignment explicitly allows Discord/Slack as alternatives.
+
+### Design Decisions
+
+- Used Discord Webhooks instead of Telegram.
+- Isolated notification logic in a dedicated service layer.
+- Triggered alerts on expense creation and updates.
+- Kept business logic outside views.
+
+### API Changes
+
+Categories now support:
+
+```json
 {
-  "name": "Dining",
   "monthly_limit": "200.00"
 }
 ```
 
-```jsonc
-// POST /api/expenses/  — this expense pushes Dining's month total to 215.00,
-// over its 200.00 limit, so an alert fires once.
-{
-  "title": "Dinner out",
-  "amount": "45.00",
-  "category": 3,
-  "date": "2026-06-09"
-}
+### Example Request
 
-// 201 Created — API responds normally; the alert is sent off the request path.
+```json
 {
-  "id": 12,
-  "title": "Dinner out",
-  "amount": "45.00",
-  "category": 3,
-  "date": "2026-06-09"
+  "name": "Dining",
+  "description": "Restaurants and takeout",
+  "monthly_limit": "200.00"
 }
 ```
+
+### Example Alert
 
 ```text
-Bot message delivered to BOT_CHAT_ID:
+🚨 Budget Alert
 
-⚠️ Budget alert: "Dining" is over its monthly limit.
-Spent 215.00 / 200.00 USD for June 2026.
+Category: Food
+Limit: 200
+Current Total: 250
+
+Monthly budget exceeded.
 ```
 
-Include **screenshots of the delivered bot alert** (the message in your
-Telegram/Discord/Slack chat) in your README as proof it works.
+### Assumptions
 
-#### Optional (pick any 2)
+- A Discord webhook URL is configured.
+- Budget limits apply monthly.
 
-Recurring expenses · CSV export · Analytics dashboard · Expense
-search/filtering · Monthly spending summaries · Favorite categories.
+### Known Limitations
 
-Each feature must be fully functional, follow existing API conventions, and
-include validation. You may also improve the Django Admin.
+- Alerts are sent immediately.
+- Multiple updates may generate repeated alerts.
 
-### API documentation
+### Alert Screenshots
 
-- Update `postman_collection.json` with any new endpoints.
-- Responses must carry enough data for a frontend to render views without extra
-  follow-up requests.
+Add screenshots here:
 
-### README write-up
 
-In your README, add two sections:
+![Discord Alert](screenshots/discord-alert-1.png)
 
-- `## My Features` — for each feature (auth, currency conversion, bot alerts,
-  and your optional one): overview, design decisions, API changes, example
-  request/response, assumptions, known limits. For bot alerts, include
-  **screenshots of the delivered alert**.
-- `## Bugs Found and Fixed` — for each bug: description, root cause, fix, and
-  commit hash.
 
-### Submission
+### Commit
 
-Submit: GitHub repo URL · updated Postman collection · updated README
-(including bot-alert screenshots).
+```text
+3ac3b81
+```
 
-### Evaluation criteria
+---
 
-Commit quality · bug-fix correctness (no regressions) · feature design ·
-Postman completeness · code readability · REST conventions (status codes,
-response shape).
+## 4. Expense Search (Optional Feature)
+
+### Overview
+
+Allows users to search expenses using keywords.
+
+### Design Decisions
+
+- Implemented through query parameters.
+- Uses case-insensitive matching.
+- Supports searching across title and notes.
+- Can be combined with date filters.
+
+### API Changes
+
+```http
+GET /api/expenses/?search=paris
+```
+
+### Example Response
+
+```json
+[
+  {
+    "id": 6,
+    "title": "Hotel in Paris",
+    "amount": "120.00",
+    "currency": "EUR",
+    "category": 1,
+    "date": "2026-06-09",
+    "notes": "Two nights"
+  }
+]
+```
+
+### Assumptions
+
+- Search is performed on title and notes fields.
+
+### Known Limitations
+
+- Full-text search is not implemented.
+
+### Commits
+
+```text
+4a3000c
+bebeb15
+```
+
+---
+
+## 5. Monthly Summary (Optional Feature)
+
+### Overview
+
+Provides monthly spending totals grouped by month.
+
+### Design Decisions
+
+- Aggregates expenses by month.
+- Converts all expenses into the configured base currency before aggregation.
+- Reuses the existing currency conversion service.
+
+### API Changes
+
+```http
+GET /api/expenses/monthly-summary/
+```
+
+### Example Response
+
+```json
+[
+  {
+    "month": "2024-01",
+    "total": "558"
+  },
+  {
+    "month": "2026-05",
+    "total": "50"
+  },
+  {
+    "month": "2026-06",
+    "total": "180"
+  }
+]
+```
+
+### Assumptions
+
+- Monthly grouping is based on expense date.
+
+### Known Limitations
+
+- Historical exchange rates are not applied.
+
+### Commit
+
+```text
+54a7bd5
+```
+
+---
+
+# Bugs Found and Fixed
+
+## Bug 1 — Incorrect Category Field Name in ExpenseSerializer
+
+### Description
+
+Expense creation and serialization failed because the serializer referenced an incorrectly spelled category field.
+
+### Root Cause
+
+A typo in `ExpenseSerializer` referenced a non-existent field.
+
+### Fix
+
+Corrected the category field spelling.
+
+### Commit
+
+```text
+b915df8
+```
+
+---
+
+## Bug 2 — Incorrect Serializer Reference in Expense Views
+
+### Description
+
+Expense endpoints failed validation because of an incorrect serializer field reference.
+
+### Root Cause
+
+A spelling mistake in expense view logic.
+
+### Fix
+
+Updated serializer references to match the serializer definition.
+
+### Commit
+
+```text
+5a0eb30
+```
+
+---
+
+## Bug 3 — End Date Filter Was Not Inclusive
+
+### Description
+
+Expenses occurring on the exact end date were excluded from filtered results.
+
+### Root Cause
+
+A strict comparison operator was used instead of an inclusive comparison.
+
+### Fix
+
+Replaced the date comparison with an inclusive filter.
+
+### Commit
+
+```text
+6b628b1
+```
+
+---
+
+## Bug 4 — Missing Aggregation Import
+
+### Description
+
+The summary endpoint failed when calculating totals.
+
+### Root Cause
+
+`Sum` was used without importing it from Django ORM.
+
+### Fix
+
+Added:
+
+```python
+from django.db.models import Sum
+```
+
+### Commit
+
+```text
+983af83
+```
+
+---
+
+## Bug 5 — URL Routing Conflict
+
+### Description
+
+Specific routes such as:
+
+```http
+/api/expenses/summary/
+```
+
+were incorrectly matched as expense IDs.
+
+### Root Cause
+
+The generic route:
+
+```python
+path("expenses/<pk>/", ...)
+```
+
+was declared before specific routes.
+
+### Fix
+
+Reordered URL patterns so specific routes are matched first.
+
+### Commit
+
+```text
+7de2896
+```
+
+---
+
+# Postman Collection
+
+The repository includes an updated Postman collection covering:
+
+- Authentication (Register/Login)
+- Categories
+- Expense CRUD operations
+- Date filtering
+- Currency conversion
+- Expense summary
+- Budget alert workflow
+- Expense search
+- Monthly summary
+
+---
+
+# Submission Checklist
+
+- [x] Fixed all required bugs
+- [x] Authentication implemented
+- [x] Currency conversion implemented
+- [x] Budget alert bot implemented
+- [x] Expense search implemented
+- [x] Monthly summary implemented
+- [x] Updated Postman collection
+- [x] Updated README
+- [x] Added Discord alert screenshots
+
+---
+
+# Author
+
+**Bishal Sharma**
+
+GitHub: https://github.com/Biswaa000
+
