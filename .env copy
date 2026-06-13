@@ -1,0 +1,24 @@
+# Copy this file to .env and fill in real values.
+SECRET_KEY=your-secret-key-here
+DEBUG=True
+
+# --- Feature: Currency conversion ---
+# Base currency all summaries/totals are reported in.
+BASE_CURRENCY=USD
+# Exchange-rate API base URL (e.g. https://api.exchangerate.host).
+# Add an API key here too if your chosen provider requires one.
+# EXCHANGE_RATE_API_URL=https://api.exchangerate.host
+# Currency conversion settings
+BASE_CURRENCY=USD
+EXCHANGE_RATE_API_URL=https://api.exchangerate.host/v1/live
+CURRENCY_API_KEY=a12609***************
+REQUEST_TIMEOUT=10
+
+# Discord bot settings
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/1514889665780387873/0YZqvGlwdMln****************
+
+# --- Feature: Budget threshold bot alerts ---
+# Telegram bot token from @BotFather (or your chosen provider's token).
+BOT_TOKEN=your-bot-token-here
+# Chat/channel id the alert message is sent to.
+BOT_CHAT_ID=your-chat-id-here
