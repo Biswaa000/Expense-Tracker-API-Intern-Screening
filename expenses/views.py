@@ -16,6 +16,7 @@ from django.conf import settings
 from .services.currency import convert_amount
 from expenses.config import currency_config
 from .services.bot import check_budget_limit
+from django.db.models import Q
 
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
@@ -49,7 +50,8 @@ def expense_list(request):
 
         if search:
             expenses = expenses.filter(
-                title__icontains=search
+                Q(title__icontains=search) |
+                Q(description__icontains=search)
             )
 
         serializer = ExpenseSerializer(expenses, many=True)
