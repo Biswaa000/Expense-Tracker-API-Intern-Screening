@@ -17,6 +17,7 @@ from .services.currency import convert_amount
 from expenses.config import currency_config
 from .services.bot import check_budget_limit
 from django.db.models import Q
+from django.db.models.functions import TruncMonth
 
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
@@ -160,6 +161,44 @@ def expense_summary(request):
         "categories": response,
     })
 
+
+# -------------------------- Monthly Summary Endpoint --------------------------
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def monthly_summary(request):
+
+    expenses = Expense.objects.filter(
+        owner=request.user
+    )
+
+    monthly_totals = defaultdict(
+        lambda: Decimal("0.00")
+    )
+
+    for expense in expenses:
+
+        conversion = convert_amount(
+            expense.amount,
+            expense.currency,
+            currency_config.BASE_CURRENCY,
+        )
+
+        month = expense.date.strftime("%Y-%m")
+
+        monthly_totals[month] += conversion["amount"]
+
+    response = []
+
+    for month in sorted(monthly_totals.keys()):
+        response.append({
+            "month": month,
+            "total": str(monthly_totals[month]),
+        })
+
+    return Response({
+        "base_currency": currency_config.BASE_CURRENCY,
+        "months": response,
+    })
 
 
 
